@@ -7,6 +7,7 @@ using GatewayApi.Aggregators;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
@@ -35,9 +36,15 @@ namespace GatewayApi
                        .AddEnvironmentVariables();
                })
                .ConfigureServices(s => {
+
+                   s.AddAuthentication(options =>
+                   {
+                       options.DefaultScheme = "CustomAuth";
+                   });
+                   
+
                    s.AddOcelot()
                    .AddTransientDefinedAggregator<CustomerWithOrdersAggregator>();
-
                })
                .ConfigureLogging((hostingContext, logging) =>
                {

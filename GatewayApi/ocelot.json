@@ -1,6 +1,18 @@
 {
   "ReRoutes": [
     {
+      "DownstreamPathTemplate": "/api/user/authenticate",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 3003
+        }
+      ],
+      "UpstreamPathTemplate": "/user/authenticate",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
       "DownstreamPathTemplate": "/api/customers/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -11,7 +23,10 @@
       ],
       "UpstreamPathTemplate": "/customers/{id}",
       "UpstreamHttpMethod": [ "Get" ],
-      "Key": "customer"
+      "Key": "customer",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "CustomAuth"
+      }
     },
     {
       "DownstreamPathTemplate": "/api/orders/customer/{id}",
@@ -25,7 +40,10 @@
       ],
       "UpstreamPathTemplate": "/orders/customer/{id}",
       "UpstreamHttpMethod": [ "Get" ],
-      "Key": "orders-by-customer"
+      "Key": "orders-by-customer",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "CustomAuth"
+      }
     }
   ],
   "Aggregates": [
