@@ -55,7 +55,7 @@
         }
       ],
       "UpstreamHost": null,
-      "Key": null,
+      "Key": "customer",
       "DelegatingHandlers": [],
       "Priority": 1,
       "Timeout": 0,
@@ -116,14 +116,29 @@
         }
       ],
       "UpstreamHost": null,
-      "Key": null,
+      "Key": "orders-by-customer",
       "DelegatingHandlers": [],
       "Priority": 1,
       "Timeout": 0,
       "DangerousAcceptAnyServerCertificateValidator": false
     }
   ],
-  "Aggregates": [],
+  "Aggregates": [
+    {
+      "ReRouteKeys": [
+        "customer",
+        "orders-by-customer"
+      ],
+      "UpstreamPathTemplate": "/api/orders-by-customer/{id}",
+      "UpstreamHost": null,
+      "ReRouteIsCaseSensitive": false,
+      "Aggregator": "CustomerWithOrdersAggregator",
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
+      "Priority": 1
+    }
+  ],
   "GlobalConfiguration": {
     "RequestIdKey": null,
     "ServiceDiscoveryProvider": {

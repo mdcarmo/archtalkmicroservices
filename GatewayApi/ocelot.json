@@ -10,7 +10,8 @@
         }
       ],
       "UpstreamPathTemplate": "/customers/{id}",
-      "UpstreamHttpMethod": [ "Get" ]
+      "UpstreamHttpMethod": [ "Get" ],
+      "Key": "customer"
     },
     {
       "DownstreamPathTemplate": "/api/orders/customer/{id}",
@@ -23,8 +24,19 @@
         }
       ],
       "UpstreamPathTemplate": "/orders/customer/{id}",
-      "UpstreamHttpMethod": [ "Get" ]
+      "UpstreamHttpMethod": [ "Get" ],
+      "Key": "orders-by-customer"
     }
   ],
-   "GlobalConfiguration": {}
+  "Aggregates": [
+    {
+      "ReRouteKeys": [
+        "customer",
+        "orders-by-customer"
+      ],
+      "UpstreamPathTemplate": "/api/orders-by-customer/{id}",
+      "Aggregator": "CustomerWithOrdersAggregator"
+    }
+  ],
+  "GlobalConfiguration": {}
 }
