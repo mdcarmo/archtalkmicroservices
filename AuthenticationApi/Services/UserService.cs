@@ -45,7 +45,7 @@ namespace AuthenticationApi.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim("role", user.Role),
+                    new Claim("userType", user.Role),
                     new Claim("name", user.FullName)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),

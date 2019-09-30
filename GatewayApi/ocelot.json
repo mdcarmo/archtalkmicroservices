@@ -25,7 +25,11 @@
       "UpstreamHttpMethod": [ "Get" ],
       "Key": "customer",
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "CustomAuth"
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "userType": "admin"
       }
     },
     {
@@ -42,7 +46,8 @@
       "UpstreamHttpMethod": [ "Get" ],
       "Key": "orders-by-customer",
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "CustomAuth"
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
       }
     }
   ],
@@ -56,5 +61,8 @@
       "Aggregator": "CustomerWithOrdersAggregator"
     }
   ],
-  "GlobalConfiguration": {}
+  "GlobalConfiguration": {
+    "RequestIdKey": "OcRequestId"
+
+  }
 }
